@@ -42,4 +42,13 @@ public class GreetingController {
     public String getGreeting1() {
         return "{\"message\": \"" + greetingService.getGreetingMessage() + "\"}";
     }
+
+    //UC3
+
+    @GetMapping("/personalized")
+    public String getPersonalizedGreeting(@RequestParam(required = false) String firstName,
+                                          @RequestParam(required = false) String lastName) {
+        return "{\"message\": \"" + greetingService.getPersonalizedGreeting(firstName, lastName) + "\"}";
+    }
+
 }
