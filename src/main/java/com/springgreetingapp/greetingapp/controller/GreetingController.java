@@ -1,8 +1,11 @@
 package com.springgreetingapp.greetingapp.controller;
 
+import com.springgreetingapp.greetingapp.model.Greeting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.springgreetingapp.greetingapp.service.GreetingService;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/greetings")
@@ -43,12 +46,19 @@ public class GreetingController {
         return "{\"message\": \"" + greetingService.getGreetingMessage() + "\"}";
     }
 
-    //UC3
-
+    //uc3
     @GetMapping("/personalized")
     public String getPersonalizedGreeting(@RequestParam(required = false) String firstName,
                                           @RequestParam(required = false) String lastName) {
         return "{\"message\": \"" + greetingService.getPersonalizedGreeting(firstName, lastName) + "\"}";
     }
+
+
+    // UC 4: Save Greeting Message
+    @PostMapping("/save")
+    public Greeting saveGreeting(@RequestBody Greeting greeting) {
+        return greetingService.saveGreeting(greeting);
+    }
+
 
 }
